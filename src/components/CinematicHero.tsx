@@ -33,7 +33,7 @@ const CinematicHero = () => {
         <div className="text-center">
           {/* Brand Name */}
           <h1
-            className={`text-cinematic-brand text-primary mb-6 font-bold tracking-widest transition-all duration-[1.5s] delay-700 ease-out ${
+            className={`text-cinematic-brand text-primary mb-6 font-bold tracking-[0.3em] transition-all duration-[1.5s] delay-700 ease-out ${
               isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
