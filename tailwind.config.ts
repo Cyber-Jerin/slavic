@@ -52,16 +52,31 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
+				// Cinematic color palette
+				void: 'hsl(var(--void))',
+				'charcoal-deep': 'hsl(var(--charcoal-deep))',
+				'charcoal-mid': 'hsl(var(--charcoal-mid))',
+				'charcoal-light': 'hsl(var(--charcoal-light))',
+				smoke: 'hsl(var(--smoke))',
+				silver: 'hsl(var(--silver))',
+				platinum: 'hsl(var(--platinum))',
+				pure: 'hsl(var(--pure))'
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+				'gradient-void': 'var(--gradient-void)',
+				'gradient-shadow': 'var(--gradient-shadow)',
+				'gradient-overlay': 'var(--gradient-overlay)'
+			},
+			boxShadow: {
+				'cinematic': 'var(--shadow-cinematic)',
+				'dramatic': 'var(--shadow-dramatic)',
+				'subtle': 'var(--shadow-subtle)'
+			},
+			transitionTimingFunction: {
+				'cinematic': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+				'elegant': 'cubic-bezier(0.4, 0, 0.2, 1)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
