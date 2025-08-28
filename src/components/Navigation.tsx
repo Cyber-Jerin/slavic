@@ -23,7 +23,7 @@ const Navigation = () => {
       <div className="container mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="text-cinematic-base text-primary font-light tracking-wider">
+          <div className="text-cinematic-base text-primary font-bold tracking-wider">
             SENZ
           </div>
 
