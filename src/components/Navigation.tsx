@@ -29,23 +29,24 @@ const Navigation = () => {
 
           {/* Navigation Items */}
           <div className="hidden md:flex items-center space-x-8">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="bg-white/10 border border-white/20 rounded-md px-4 py-2 text-cinematic-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-elegant w-48"
+              />
+            </div>
             <a
-              href="#collection"
+              href="#about"
               className="text-cinematic-sm text-muted-foreground hover:text-primary transition-elegant cursor-pointer"
             >
-              Collection
+              About
             </a>
             <a
-              href="#philosophy"
+              href="#offers"
               className="text-cinematic-sm text-muted-foreground hover:text-primary transition-elegant cursor-pointer"
             >
-              Philosophy
-            </a>
-            <a
-              href="#sustainability"
-              className="text-cinematic-sm text-muted-foreground hover:text-primary transition-elegant cursor-pointer"
-            >
-              Sustainability
+              Offers
             </a>
             <a
               href="#contact"
