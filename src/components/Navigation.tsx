@@ -29,37 +29,39 @@ const Navigation = () => {
 
           {/* Navigation Items */}
           <div className="hidden md:flex items-center space-x-8">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="bg-white/10 border border-white/20 rounded-md px-4 py-2 text-cinematic-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-elegant w-48"
-              />
-            </div>
             <a
-              href="#collection"
+              href="/collection"
               className="text-cinematic-sm text-muted-foreground hover:text-primary transition-elegant cursor-pointer"
             >
               Collection
             </a>
             <a
-              href="#about"
+              href="/about"
               className="text-cinematic-sm text-muted-foreground hover:text-primary transition-elegant cursor-pointer"
             >
               About
             </a>
             <a
-              href="#offers"
+              href="/sustainability"
               className="text-cinematic-sm text-muted-foreground hover:text-primary transition-elegant cursor-pointer"
             >
-              Offers
+              Sustainability
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="text-cinematic-sm text-muted-foreground hover:text-primary transition-elegant cursor-pointer"
             >
               Contact
             </a>
+            <button 
+              onClick={() => window.location.href = '/search'}
+              className="text-muted-foreground hover:text-primary transition-elegant cursor-pointer"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}

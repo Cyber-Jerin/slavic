@@ -55,6 +55,16 @@ const CinematicHero = () => {
               isLoaded ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
             }`}
           />
+          
+          {/* Explore Button */}
+          <button
+            onClick={() => window.location.href = '/explore'}
+            className={`mt-12 px-8 py-3 border border-primary text-primary hover:bg-primary hover:text-background transition-all duration-500 tracking-wider text-cinematic-sm transition-all duration-1000 delay-1600 ease-out ${
+              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+          >
+            EXPLORE
+          </button>
         </div>
       </div>
 
