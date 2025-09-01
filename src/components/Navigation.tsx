@@ -24,7 +24,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="text-cinematic-base text-primary font-bold tracking-wider">
-            SENZ
+            SLAVIC
           </div>
 
           {/* Navigation Items */}
