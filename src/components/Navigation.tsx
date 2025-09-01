@@ -37,6 +37,12 @@ const Navigation = () => {
               />
             </div>
             <a
+              href="#collection"
+              className="text-cinematic-sm text-muted-foreground hover:text-primary transition-elegant cursor-pointer"
+            >
+              Collection
+            </a>
+            <a
               href="#about"
               className="text-cinematic-sm text-muted-foreground hover:text-primary transition-elegant cursor-pointer"
             >
