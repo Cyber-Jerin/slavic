@@ -23,9 +23,12 @@ const Navigation = () => {
       <div className="container mx-auto px-6 py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="text-cinematic-base text-primary font-bold tracking-wider">
+          <button 
+            onClick={() => window.location.href = '/'}
+            className="text-cinematic-base text-primary font-bold tracking-wider hover:opacity-80 transition-opacity cursor-pointer"
+          >
             SLAVIC
-          </div>
+          </button>
 
           {/* Navigation Items */}
           <div className="hidden md:flex items-center space-x-8">
