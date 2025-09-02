@@ -55,43 +55,28 @@ const CinematicHero = () => {
               isLoaded ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
             }`}
           />
+          
+          {/* Explore Button */}
+          <button
+            onClick={() => {
+              document.body.style.transform = 'translateY(-100vh)';
+              document.body.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+              setTimeout(() => {
+                window.location.href = '/explore';
+              }, 800);
+            }}
+            className={`mt-12 px-8 py-3 border border-primary text-primary hover:bg-primary hover:text-background transition-all duration-500 tracking-wider text-cinematic-sm transition-all duration-1000 delay-1600 ease-out ${
+              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+          >
+            EXPLORE
+          </button>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <button
-        onClick={() => {
-          // Create overlay starting from the line position
-          const overlay = document.createElement('div');
-          overlay.style.cssText = `
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            height: 1.5rem;
-            background: hsl(var(--primary));
-            z-index: 9999;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-          `;
-          document.body.appendChild(overlay);
-          
-          // Delay then expand upward
-          setTimeout(() => {
-            overlay.style.width = '100vw';
-            overlay.style.height = '100vh';
-            overlay.style.bottom = '0';
-            overlay.style.left = '0';
-            overlay.style.transform = 'none';
-            overlay.style.background = 'hsl(var(--background))';
-          }, 300);
-          
-          // Navigate after animation
-          setTimeout(() => {
-            window.location.href = '/explore';
-          }, 1100);
-        }}
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-1500 ease-out cursor-pointer hover:opacity-100 ${
+      <div
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-1500 ease-out ${
           isLoaded ? 'opacity-70 translate-y-0' : 'opacity-0 translate-y-4'
         }`}
       >
@@ -99,7 +84,7 @@ const CinematicHero = () => {
           <div className="text-cinematic-xs text-muted-foreground">Explore</div>
           <div className="h-6 w-px bg-primary animate-pulse" />
         </div>
-      </button>
+      </div>
     </section>
   );
 };
