@@ -55,28 +55,19 @@ const CinematicHero = () => {
               isLoaded ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
             }`}
           />
-          
-          {/* Explore Button */}
-          <button
-            onClick={() => {
-              document.body.style.transform = 'translateY(-100vh)';
-              document.body.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-              setTimeout(() => {
-                window.location.href = '/explore';
-              }, 800);
-            }}
-            className={`mt-12 px-8 py-3 border border-primary text-primary hover:bg-primary hover:text-background transition-all duration-500 tracking-wider text-cinematic-sm transition-all duration-1000 delay-1600 ease-out ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-          >
-            EXPLORE
-          </button>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-1500 ease-out ${
+      <button
+        onClick={() => {
+          document.body.style.transform = 'translateY(-100vh)';
+          document.body.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+          setTimeout(() => {
+            window.location.href = '/explore';
+          }, 800);
+        }}
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-1500 ease-out cursor-pointer hover:opacity-100 ${
           isLoaded ? 'opacity-70 translate-y-0' : 'opacity-0 translate-y-4'
         }`}
       >
@@ -84,7 +75,7 @@ const CinematicHero = () => {
           <div className="text-cinematic-xs text-muted-foreground">Explore</div>
           <div className="h-6 w-px bg-primary animate-pulse" />
         </div>
-      </div>
+      </button>
     </section>
   );
 };
