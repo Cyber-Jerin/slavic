@@ -1,18 +1,29 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import CinematicHero from '@/components/CinematicHero';
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Force dark mode for the cinematic aesthetic
     document.documentElement.classList.add('dark');
 
-    const handleScroll = () => setScrollY(window.scrollY);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+      
+      // Navigate to collection when scrolled past the third section
+      if (currentScrollY > 1200) {
+        navigate('/collection');
+      }
+    };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [navigate]);
 
   return (
     <main className="min-h-screen bg-background">
