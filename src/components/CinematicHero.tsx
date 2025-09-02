@@ -61,11 +61,35 @@ const CinematicHero = () => {
       {/* Scroll Indicator */}
       <button
         onClick={() => {
-          document.body.style.transform = 'translateY(-100vh)';
-          document.body.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+          // Create overlay starting from the line position
+          const overlay = document.createElement('div');
+          overlay.style.cssText = `
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 1.5rem;
+            background: hsl(var(--primary));
+            z-index: 9999;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+          `;
+          document.body.appendChild(overlay);
+          
+          // Delay then expand upward
+          setTimeout(() => {
+            overlay.style.width = '100vw';
+            overlay.style.height = '100vh';
+            overlay.style.bottom = '0';
+            overlay.style.left = '0';
+            overlay.style.transform = 'none';
+            overlay.style.background = 'hsl(var(--background))';
+          }, 300);
+          
+          // Navigate after animation
           setTimeout(() => {
             window.location.href = '/explore';
-          }, 800);
+          }, 1100);
         }}
         className={`absolute bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-1500 ease-out cursor-pointer hover:opacity-100 ${
           isLoaded ? 'opacity-70 translate-y-0' : 'opacity-0 translate-y-4'
