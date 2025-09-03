@@ -1,5 +1,16 @@
 import { useState, useEffect } from 'react';
-import Navigation from '@/components/Navigation';
+import { useEcommerce } from '@/contexts/EcommerceContext';
+import EcommerceNavigation from '@/components/EcommerceNavigation';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Heart, ShoppingBag } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 const categories = ['All', 'Men', 'Women', 'Sneakers', 'Accessories'];
 const sizeFilters = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
@@ -64,11 +75,16 @@ const products = [
 ];
 
 const Collection = () => {
+  const { state, dispatch } = useEcommerce();
   const [isLoaded, setIsLoaded] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedPriceRanges, setSelectedPriceRanges] = useState<string[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedSize, setSelectedSize] = useState('');
+  
+  const availableSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
   useEffect(() => {
     document.documentElement.classList.add('dark');
@@ -91,9 +107,28 @@ const Collection = () => {
     }
   };
 
+  const addToCart = (product: any, size: string) => {
+    const cartItem = {
+      ...product,
+      size,
+      quantity: 1
+    };
+    dispatch({ type: 'ADD_TO_CART', payload: cartItem });
+    setSelectedProduct(null);
+    setSelectedSize('');
+  };
+
+  const addToWishlist = (product: any) => {
+    dispatch({ type: 'ADD_TO_WISHLIST', payload: product });
+  };
+
+  const isInWishlist = (productId: number) => {
+    return state.wishlist.some(item => item.id === productId);
+  };
+
   return (
     <main className="min-h-screen bg-background">
-      <Navigation />
+      <EcommerceNavigation />
       
       <section className="pt-24 pb-16">
         <div className="container mx-auto px-6">
@@ -213,7 +248,7 @@ const Collection = () => {
                 {filteredProducts.map((product, index) => (
                   <div
                     key={product.id}
-                    className={`group cursor-pointer transition-all duration-700 ease-out ${
+                    className={`group transition-all duration-700 ease-out ${
                       isLoaded 
                         ? 'opacity-100 translate-y-0' 
                         : 'opacity-0 translate-y-12'
@@ -226,7 +261,90 @@ const Collection = () => {
                         alt={product.name}
                         className="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-background/0 group-hover:bg-background/10 transition-all duration-500" />
+                      
+                      {/* Overlay Actions */}
+                      <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                        <div className="space-y-3">
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button 
+                                className="w-full"
+                                onClick={() => setSelectedProduct(product)}
+                              >
+                                <ShoppingBag size={16} className="mr-2" />
+                                Add to Bag
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Select Size</DialogTitle>
+                              </DialogHeader>
+                              <div className="space-y-4">
+                                <div className="flex items-center gap-4">
+                                  <img
+                                    src={selectedProduct?.image}
+                                    alt={selectedProduct?.name}
+                                    className="w-16 h-20 object-cover rounded"
+                                  />
+                                  <div>
+                                    <h3 className="font-medium">{selectedProduct?.name}</h3>
+                                    <p className="text-primary font-bold">{selectedProduct?.price}</p>
+                                  </div>
+                                </div>
+                                
+                                <div>
+                                  <h4 className="text-sm font-medium mb-3">Available Sizes:</h4>
+                                  <div className="grid grid-cols-6 gap-2">
+                                    {availableSizes.map((size) => (
+                                      <button
+                                        key={size}
+                                        onClick={() => setSelectedSize(size)}
+                                        className={`px-3 py-2 text-sm border transition-colors ${
+                                          selectedSize === size
+                                            ? 'border-primary text-primary bg-primary/5'
+                                            : 'border-border hover:border-primary/50'
+                                        }`}
+                                      >
+                                        {size}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                                
+                                <Button 
+                                  className="w-full" 
+                                  onClick={() => addToCart(selectedProduct, selectedSize)}
+                                  disabled={!selectedSize}
+                                >
+                                  Add to Bag
+                                </Button>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                          
+                          <Button 
+                            variant="outline" 
+                            className="w-full"
+                            onClick={() => addToWishlist(product)}
+                            disabled={isInWishlist(product.id)}
+                          >
+                            <Heart size={16} className="mr-2" />
+                            {isInWishlist(product.id) ? 'In Wishlist' : 'Add to Wishlist'}
+                          </Button>
+                        </div>
+                      </div>
+
+                      {/* Wishlist Heart */}
+                      <button
+                        onClick={() => addToWishlist(product)}
+                        className={`absolute top-4 right-4 w-8 h-8 bg-background/80 rounded-full flex items-center justify-center transition-colors ${
+                          isInWishlist(product.id) 
+                            ? 'text-red-500' 
+                            : 'text-muted-foreground hover:text-red-500'
+                        }`}
+                      >
+                        <Heart size={16} fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
+                      </button>
                     </div>
                     
                     <div className="mt-4 space-y-2">
@@ -238,9 +356,14 @@ const Collection = () => {
                           {product.price}
                         </span>
                       </div>
-                      <p className="text-cinematic-sm text-muted-foreground uppercase tracking-wider">
-                        {product.type}
-                      </p>
+                      <div className="flex items-center justify-between">
+                        <p className="text-cinematic-sm text-muted-foreground uppercase tracking-wider">
+                          {product.type}
+                        </p>
+                        <Badge variant="outline" className="text-xs">
+                          {product.category}
+                        </Badge>
+                      </div>
                     </div>
                   </div>
                 ))}
