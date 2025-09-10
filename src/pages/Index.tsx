@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '@/components/Navigation';
 import CinematicHero from '@/components/CinematicHero';
+import AdminLink from '@/components/AdminLink';
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -89,6 +90,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <AdminLink />
     </main>
   );
 };
